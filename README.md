@@ -1,5 +1,11 @@
 # Maple-Idle
-Controls
+1. Introduction
+
+Welcome to Maple Idle! In this incremental idle role-playing game, you fight monsters and collect items. 
+
+
+
+3. Controls
 
 Press Left to select a weaker monster
 
