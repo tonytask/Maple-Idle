@@ -5,7 +5,7 @@ Welcome to Maple Idle! In this incremental idle role-playing game, you fight mon
 
 
 
-3. Controls
+2. Controls
 
 Press Left to select a weaker monster
 
