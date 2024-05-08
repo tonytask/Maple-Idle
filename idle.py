@@ -39,7 +39,7 @@ drop_table = {'Snail': {20: 'Work Gloves +1',125: 'Green Headband'},
                'Green Mushroom': {25:'Work Gloves +2',50: 'White Starry Bandana'},
                'Horny Mushroom': {20: 'Iron Burgernet Helm',35:'Warfare Pants', 60: 'Red Whitebottom Shoes'},
                'Evil Eye': {25: 'Maple Sword', 50: 'Maple Cape'},
-               'Mano': {1000: 'Work Gloves +3'}}
+               'Mano': {100: 'Cutlus', 500: 'Work Gloves +3'}}
 
 exp_to_next_level = {1: 15, 2:34, 3:57, 4:92, 5:135, 6:372, 7:560, 8:840, 9:1242, 10:1144,
                     11:1573,12:2144,13:2800,14:3640,15:4700,16:5893,17:7360,18:9144, 
@@ -376,6 +376,10 @@ class UserInterface():
     
     def update(self):
         self.GameState.proceed()
+
+    #def homeScreen(self):
+    #    self.window.fill((255,255,255))
+    #    pygame.draw.rect(self.window,(192,192,192),(int(width*0.4),int(height*0.4), int (width*0.2), int(height*0.2))
 
     def render(self):
         #Make screen white
