@@ -1,5 +1,7 @@
 import pygame
+from pygame.locals import *
 import random
+import json
 
 width = 1024
 height = 768
@@ -31,7 +33,7 @@ boss_timer = {'Mano': 0, 'Stumpy': 0}
 
 drop_table = {'Snail': {25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green Headband',},
                'Blue Snail': {25: 'Grey Thick Sweat Pants',50: 'Blue One-Lined T-Shirt', 125: 'White Undershirt +1'},
-               'Shroom': {25: 'Ice Jeans', 125: 'Jean Capris'},
+               'Shroom': {25: 'Ice Jeans',40:'Hat Scroll DEF 100%', 125: 'Jean Capris'},
                'Red Snail': {10: 'Wooden Sword +3', 25:'Glove Scroll ATT 10%',80: 'Wooden Sword'},
                'Slime': {25: 'Fork on a Stick', 55: 'Bronze Aroa Boots', 100: 'White Bandana'},
                'Orange Mushroom': {40: 'Bronze Koif', 80: 'White Gomushin', 125: 'Spear'},
@@ -108,7 +110,8 @@ drop_list = {'Empty': ['Hat', 0,0,0,0,0],
                 #scroll
                 'Glove Scroll ATT 100%': ['Scroll',0,1,0,100,'Gloves'],
                 'Glove Scroll ATT 60%': ['Scroll',0,2,0,60,'Gloves'],
-                'Glove Scroll ATT 10%': ['Scroll',0,3,0,10,'Gloves']
+                'Glove Scroll ATT 10%': ['Scroll',0,3,0,10,'Gloves'],
+                'Hat Scroll DEF 100%': ['Scroll',0,0,1,100,'Hat']
               }
 
 #The game's variables
@@ -159,6 +162,40 @@ class GameState():
 
         #Others
         self.timeCounter = 0
+
+    def saveGame(self):
+        #data = {}
+        data["self.mobCounter"] = self.mobCounter
+        data['self.currentEnemy'] = self.currentEnemy
+        data['self.monsterLevel'] = self.monsterLevel
+        data['self.monsterCurrentHP'] = self.monsterCurrentHP
+        data['self.monsterAttack'] = self.monsterAttack
+        data['self.monsterMeso'] = self.monsterMeso
+        data['self.currentEXP'] = self.currentEXP
+        data['self.playerStrength'] = self.playerStrength
+        data['self.playerTotalStrength'] = self.playerTotalStrength
+        data['self.playerLevel'] = self.playerLevel
+        data['self.playerCurrentHP'] = self.playerCurrentHP
+        data['self.playerMaxHP'] = self.playerMaxHP
+        data['self.playerCurrentMP'] = self.playerCurrentMP
+        data['self.playerMaxMP'] = self.playerMaxMP
+        data['self.playerSP'] = self.playerSP
+        data['self.playerHPRecovery'] = self.playerHPRecovery
+        data['self.playerDamageTaken'] = self.playerDamageTaken
+        data['self.playerNextDamage'] = self.playerNextDamage
+        data['self.playerIsDead'] = self.playerIsDead
+        data['self.playerMeso'] = self.playerMeso
+        data['self.playerInventorySize'] = self.playerInventorySize
+        data['self.playerInventoryCount'] = self.playerInventoryCount
+
+        data['self.playerEquips'] = self.playerEquips
+
+        data['self.playerArmor'] = self.playerArmor
+        data['self.playerWA']= self.playerWA
+        data['self.playerMaxDamage'] = self.playerMaxDamage
+
+        data['self.powerStrikeCost'] = self.powerStrikeCost
+        data['self.powerStrikeMultiplier'] = self.powerStrikeMultiplier
 
     def selectRightMob(self):
         if(self.isBoss == True):
@@ -315,8 +352,46 @@ class GameState():
         self.playerWA = self.playerEquips['Hat'][3] + self.playerEquips['Top'][3] + self.playerEquips['Bottom'][3] + self.playerEquips['Shoes'][3] + self.playerEquips['Weapon'][3] + self.playerEquips['Gloves'][3] + self.playerEquips['Cape'][3]
         self.playerMaxDamage = int(self.playerWA * self.playerTotalStrength * 4 / 100)
 
-    def scrollItem(self):
-        print()
+    def loadGame(self):
+        
+        self.mobCounter = data['self.mobCounter']
+        self.bossCounter = data['self.bossCounter']
+        self.isBoss = data['self.isBoss']
+        self.currentEnemy = data['self.currentEnemy']
+        self.monsterLevel = data['self.monsterLevel']
+        self.monsterCurrentHP = data['self.monsterCurrentHP']
+        self.monsterAttack = data['self.monsterAttack']
+        self.monsterMeso = data['self.monsterMeso']
+        self.currentEXP = data['self.currentEXP']
+        self.playerStrength = data['self.playerStrength']
+        self.playerTotalStrength = data['self.playerTotalStrength']
+        self.playerLevel = data['self.playerLevel']
+        self.playerCurrentHP = data['self.playerCurrentHP']
+        self.playerMaxHP = data['self.playerMaxHP']
+        self.playerCurrentMP = data['self.playerCurrentMP']
+        self.playerMaxMP = data['self.playerMaxMP']
+        self.playerSP = data['self.playerSP']
+        self.playerHPRecovery = data['self.playerHPRecovery']
+        self.playerDamageTaken = data['self.playerDamageTaken']
+        self.playerNextDamage = data['self.playerNextDamage']
+        self.playerIsDead = data['self.playerIsDead']
+        self.playerMeso = data['self.playerMeso']
+        self.playerInventorySize = data['self.playerInventorySize']
+        self.playerInventoryCount = data['self.playerInventoryCount']
+        #Name of item, item type, inventory slot, str, wa, armor
+        self.InventoryR = data['self.InventoryR']
+
+        #Equipment
+        self.playerEquips = data['self.playerEquips']
+
+        self.playerArmor = data['self.playerArmor']
+        self.playerWA = data['self.playerWA']
+        self.playerMaxDamage = data['self.playerMaxDamage']
+
+        #Skills
+        self.powerStrikeCost = data['self.powerStrikeCost']
+        self.powerStrikeMultiplier = data['self.powerStrikeMultiplier']
+
 
     def proceed(self):
         for item in boss_timer:
@@ -361,6 +436,7 @@ class UserInterface():
         self.onMenu = True
         self.onControls = False
         self.image_item_rect = []
+        self.gameLoaded = 0
 
         self.mouse = pygame.mouse.get_pos()
 
@@ -368,6 +444,9 @@ class UserInterface():
     def processInput(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.GameState.saveGame()
+                with open('data.txt','w') as store_data:
+                    json.dump(data, store_data)
                 self.running = False
                 break
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -507,6 +586,9 @@ class UserInterface():
                                 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    self.GameState.saveGame()
+                    with open('data.txt','w') as store_data:
+                        json.dump(data, store_data)
                     self.onMenu = True
                     break
                 elif event.key == pygame.K_RIGHT:
@@ -533,6 +615,7 @@ class UserInterface():
                                 if(self.GameState.monsterCurrentHP <=0):
                                     self.GameState.monsterDie()
                                     self.GameState.loot()
+                                break
                 elif event.key == pygame.K_d:
                     for a in range((self.GameState.playerInventoryCount)):
                         if(self.image_item_rect[a].x<=self.mouse[0]< (self.image_item_rect[a].x+int(self.image_item_rect[a].width))
@@ -924,6 +1007,10 @@ class UserInterface():
                 self.controlsUI()
                 pygame.time.wait(50)
 
+            if(self.gameLoaded==0):
+                self.GameState.loadGame()
+                self.gameLoaded+=1
+
             if(self.onControls == False and self.onMenu == False):
                 # Main Game Loop
                 self.mouse = pygame.mouse.get_pos()
@@ -933,6 +1020,8 @@ class UserInterface():
                     self.GameState.expMin += 1
                     if(self.GameState.expMin == 60):
                         self.GameState.expMin = 0
+                if(self.GameState.timeCounter %600 ==0):
+                    self.GameState.saveGame()
                 self.render()
 
                 #Exp Per Min
@@ -940,6 +1029,55 @@ class UserInterface():
 
             pygame.time.wait(50)
             
-            
+
+#checks if there is a save file
+data = {
+    'self.mobCounter':0,
+    'self.bossCounter': 0,
+    'self.isBoss': False,
+    'self.currentEnemy': 'Snail',
+    'self.monsterLevel': monster_table['Snail'][0],
+    'self.monsterCurrentHP': monster_table['Snail'][1],
+    'self.monsterAttack': monster_table['Snail'][2],
+    'self.monsterMeso': monster_table['Snail'][4],
+    'self.currentEXP': 0,
+    'self.playerStrength':12,
+    'self.playerTotalStrength': 12,
+    'self.playerLevel': 1,
+    'self.playerCurrentHP':50,
+    'self.playerMaxHP': 50,
+    'self.playerCurrentMP': 5,
+    'self.playerMaxMP': 5,
+    'self.playerSP': 0,
+    'self.playerHPRecovery': 1,
+    'self.playerDamageTaken': 1,
+    'self.playerNextDamage': 0,
+    'self.playerIsDead': False,
+    'self.playerMeso': 50,
+    'self.playerInventorySize':16,
+    'self.playerInventoryCount': 0,
+    'self.InventoryR': [],
+
+    'self.playerEquips': {'Weapon':['Sword', 'Weapon', 0, 17, 0, 7],'Top':['White Undershirt', 'Top', 0, 0, 3, 7],'Bottom':['Blue Jean Shorts','Bottom',0,0,2,7],
+                             'Gloves':['Empty', 'Gloves',0,0,0,0],'Hat':['Empty', 'Hat', 0,0,0,0],
+                             'Shoes':['Leather Sandals', 'Shoes',0,0,2,5], 'Cape':['Empty','Cape',0,0,0,0]},
+
+    'self.playerArmor': 7,
+    'self.playerWA': 17,
+    'self.playerMaxDamage': 8,
+
+    'self.powerStrikeCost': 10,
+    'self.powerStrikeMultiplier': 2
+
+}
+
+try:
+    with open('data.txt') as load_file:
+        data = json.load(load_file)
+except:
+    with open('data.txt','w') as store_file:
+        json.dump(data, store_file)
+
+
 UserInterface = UserInterface()
 UserInterface.run()
