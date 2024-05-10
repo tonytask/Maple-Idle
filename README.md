@@ -15,9 +15,9 @@ Press Up to swap to Boss monster
 
 Press Down to swap to Normal monster
 
-Press 1 to use "Power Strike"
+Press 1 to use the "Power Strike" Skill
 
-Press on Item in Inventory to Equip It
+Press on an Item in Inventory to Equip It
 
 Hover over an Item in the Inventory and Press D to Destroy It
 
