@@ -26,7 +26,7 @@ Hover over an Item in the Inventory and Press D to Destroy It
 
 Add Dexterity and Accuarcy Stat to make the game more similar to Maplestory and more Interesting
 
-Add Stat and Skill Point System
+Enhance Stat and Skill Point System
 
 Add Shop System
 
