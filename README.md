@@ -1,11 +1,21 @@
 # Maple-Idle
 1. Introduction
 
-Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. In this incremental idle role-playing game, you fight monsters and collect items. You can scroll your items to make them stronger.
+Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. The game is primarily and incremental idle RPG.
 
 
+2. Features
 
-3. Controls
+Multiple Monsters and Bosses to Battle
+
+Equipment Progression
+
+Equipment Enhancement System
+
+Automatic Save/Load
+
+
+4. Controls
 
 Press Left to select a weaker monster
 
