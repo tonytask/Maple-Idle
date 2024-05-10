@@ -21,3 +21,18 @@ Press on Item in Inventory to Equip It
 
 Hover over an Item in the Inventory and Press D to Destroy It
 
+
+3. To Do
+
+Add Dexterity and Accuarcy Stat to make the game more similar to Maplestory and more Interesting
+
+Add Stat and Skill Point System
+
+Add Shop System
+
+Add more Monsters, Bosses, Items, Higher Level Cap
+
+Balance Item Progression
+
+
+
