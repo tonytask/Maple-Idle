@@ -19,6 +19,8 @@ Press 1 to use the "Power Strike" Skill
 
 Press on an Item in Inventory to Equip It
 
+Press on a Scroll in Inventory to Use It
+
 Hover over an Item in the Inventory and Press D to Destroy It
 
 
