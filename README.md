@@ -15,7 +15,7 @@ Equipment Enhancement System
 Automatic Save/Load
 
 
-4. Controls
+3. Controls
 
 Press Left to select a weaker monster
 
