@@ -928,17 +928,17 @@ class UserInterface():
                 # Main Game Loop
                 self.mouse = pygame.mouse.get_pos()
                 self.processInput()
-                if(self.GameState.timeCounter %1 == 0):
+                if(self.GameState.timeCounter %20 == 0):
                     self.update()
+                    self.GameState.expMin += 1
+                    if(self.GameState.expMin == 60):
+                        self.GameState.expMin = 0
                 self.render()
 
                 #Exp Per Min
                 self.GameState.timeCounter += 1
-                self.GameState.expMin += 1
-                if(self.GameState.expMin == 60):
-                    self.GameState.expMin = 0
 
-            pygame.time.wait(5)
+            pygame.time.wait(50)
             
             
 UserInterface = UserInterface()
