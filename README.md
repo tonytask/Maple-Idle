@@ -23,6 +23,8 @@ Press on a Scroll in Inventory to Use It
 
 Hover over an Item in the Inventory and Press D to Destroy It
 
+Press Escape to Return to the Previous Screen. If no Previous, End
+
 
 3. To Do
 
