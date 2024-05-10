@@ -5,7 +5,7 @@ Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. In this in
 
 
 
-2. Controls
+3. Controls
 
 Press Left to select a weaker monster
 
@@ -26,7 +26,7 @@ Hover over an Item in the Inventory and Press D to Destroy It
 Press Escape to Return to the Previous Screen. If no Previous, End
 
 
-3. To Do
+4. To Do
 
 Add Dexterity and Accuarcy Stat to make the game more similar to Maplestory and more Interesting
 
