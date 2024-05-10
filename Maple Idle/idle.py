@@ -3,16 +3,26 @@ from pygame.locals import *
 import random
 import json
 
+
+#Screen Dimensions
 width = 1024
 height = 768
 
+#List of Monsters
 monster_list = ['Snail', 'Blue Snail', 'Shroom', 'Red Snail', 'Slime', 'Orange Mushroom',
                 'Ribbon Pig', 'Octopus', 'Bubbling', 'Green Mushroom', 'Horny Mushroom',
                 'Evil Eye']
 
+#List of Bosses
 boss_list = ['Mano', 'Stumpy']
 
-#Level, HP, Att, Exp, Meso, Kill Count
+#Monster Data Table
+#0: Level
+#1: HP
+#2: Attack
+#3: EXP
+#4: Mesos
+#5: Kill Count
 monster_table = {'Snail': [1,8,12,3,6,0],
                  'Blue Snail': [2,15,18,4,12,0],
                  'Shroom': [2,20,24,5,12,0],
@@ -31,6 +41,8 @@ boss_table = {'Mano': [20,2000,125,200,200,0],
 
 boss_timer = {'Mano': 0, 'Stumpy': 0}
 
+#Loot Table for Monster
+#Number/10000 represents Probability of Item Dropping
 drop_table = {'Snail': {25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green Headband',},
                'Blue Snail': {25: 'Grey Thick Sweat Pants',50: 'Blue One-Lined T-Shirt', 125: 'White Undershirt +1'},
                'Shroom': {25: 'Ice Jeans',40:'Hat Scroll DEF 100%', 125: 'Jean Capris'},
@@ -49,12 +61,17 @@ drop_table = {'Snail': {25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green
                'Mano': {100: 'Cutlus', 500: 'Work Gloves +3'},
                'Stumpy': {500: 'Dark Knuckle +2'}}
 
+#Exp Table
 exp_to_next_level = {1: 15, 2:34, 3:57, 4:92, 5:135, 6:372, 7:560, 8:840, 9:1242, 10:1144,
                     11:1573,12:2144,13:2800,14:3640,15:4700,16:5893,17:7360,18:9144, 
                     19:11120,20:13477,21:16268,22:19320,23:22880,24:27008,25:31477,
                     26:36600,27:42444,28:48720,29:55813,30:63800}
 
-                #hat
+
+
+
+#List of all droppable items              
+               #hat
 drop_list = {'Empty': ['Hat', 0,0,0,0,0],
               'Green Headband': ['Hat',0,0,5,7,0],
               'White Bandana': ['Hat',0,0,8,7,0],
@@ -114,7 +131,7 @@ drop_list = {'Empty': ['Hat', 0,0,0,0,0],
                 'Hat Scroll DEF 100%': ['Scroll',0,0,1,100,'Hat']
               }
 
-#The game's variables
+#The game's variables and functions
 class GameState():
     def __init__(self):
         self.mobCounter = 0
@@ -141,7 +158,14 @@ class GameState():
         self.playerMeso = 50
         self.playerInventorySize = 16
         self.playerInventoryCount = 0
-        #Name of item, item type, inventory slot, str, wa, armor
+        #Item name, Item Type, Strength, WA, Armor, Upgrade Slots, Scroll Detect
+        #0 = Name of Item
+        #1 = Type of Item
+        #2 = Strength
+        #3 = Weapon Attack
+        #4 = Armor
+        #5 = Upgrade Slots Remaining
+        #6 = For Scroll Items, Detects what Equipment to Upgrade
         self.InventoryR = []
 
         self.expCount = [0]*60
@@ -164,7 +188,6 @@ class GameState():
         self.timeCounter = 0
 
     def saveGame(self):
-        #data = {}
         data["self.mobCounter"] = self.mobCounter
         data['self.currentEnemy'] = self.currentEnemy
         data['self.monsterLevel'] = self.monsterLevel
@@ -454,112 +477,79 @@ class UserInterface():
                         if(self.image_item_rect[a].x<=self.mouse[0]< (self.image_item_rect[a].x+int(self.image_item_rect[a].width)) and (self.image_item_rect[a].y<= self.mouse[1] < self.image_item_rect[a].y+int(self.image_item_rect[a].height))):
                             if(self.GameState.InventoryR[a][1] == 'Hat'):
                                 if(self.GameState.playerEquips['Hat'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Hat'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Hat'] = self.GameState.playerEquips['Hat']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
-                                    
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Hat']
-                                    
                                     self.GameState.playerEquips['Hat'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Hat'] = self.GameState.playerEquips['Hat']
                                     self.GameState.InventoryR[a] =temp
-                                    
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Top'):
                                 if(self.GameState.playerEquips['Top'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Top'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Top'] = self.GameState.playerEquips['Top']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
-                                    
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Top']
-                                    
                                     self.GameState.playerEquips['Top'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Top'] = self.GameState.playerEquips['Top']
                                     self.GameState.InventoryR[a] =temp
-                                    
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Bottom'):
                                 if(self.GameState.playerEquips['Bottom'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Bottom'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Bottom'] = self.GameState.playerEquips['Bottom']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
-                                    
                                     break
                                 else:
-                                    
                                     temp = self.GameState.playerEquips['Bottom']
                                     self.GameState.playerEquips['Bottom'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Bottom'] = self.GameState.playerEquips['Bottom']
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Gloves'):
                                 if(self.GameState.playerEquips['Gloves'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Gloves'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Gloves'] = self.GameState.playerEquips['Gloves']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Gloves']
-                                    
                                     self.GameState.playerEquips['Gloves'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Gloves'] = self.GameState.playerEquips['Gloves']
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Shoes'):
                                 if(self.GameState.playerEquips['Shoes'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Shoes'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Shoes'] = self.GameState.playerEquips['Shoes']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Shoes']
-                                    
                                     self.GameState.playerEquips['Shoes'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Shoes'] = self.GameState.playerEquips['Shoes']
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Cape'):
                                 if(self.GameState.playerEquips['Cape'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Cape'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Cape'] = self.GameState.playerEquips['Cape']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Cape']
-                                    
                                     self.GameState.playerEquips['Cape'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Cape'] = self.GameState.playerEquips['Cape']
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Weapon'):
                                 if(self.GameState.playerEquips['Weapon'][0] == 'Empty'):
-                                    
                                     self.GameState.playerEquips['Weapon'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Weapon'] = self.GameState.playerEquips['Weapon']
                                     self.GameState.InventoryR.pop(a)
                                     self.GameState.playerInventoryCount -=1
                                     break
                                 else:
                                     temp = self.GameState.playerEquips['Weapon']
-                                    
                                     self.GameState.playerEquips['Weapon'] = self.GameState.InventoryR[a]
-                                    self.GameState.playerEquips['Weapon'] = self.GameState.playerEquips['Weapon']
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Scroll'):
@@ -623,15 +613,9 @@ class UserInterface():
                             self.GameState.InventoryR.pop(a)
                             self.GameState.playerInventoryCount -=1
                             break
-
-
-    
+   
     def update(self):
         self.GameState.proceed()
-
-    #def homeScreen(self):
-    #    self.window.fill((255,255,255))
-    #    pygame.draw.rect(self.window,(192,192,192),(int(width*0.4),int(height*0.4), int (width*0.2), int(height*0.2))
 
     def render(self):
         #Make screen white
@@ -666,7 +650,7 @@ class UserInterface():
         text_exp = self.font.render(('Exp: ' + str(self.GameState.currentEXP) + "/" + str(exp_to_next_level[self.GameState.playerLevel])),False,(255,255,255))
         self.window.blit(text_exp,(width*0.01,int(height*0.975)))
 
-        #Monster Text Descriptors
+        #Monster Descriptors
 
         image_monster = pygame.image.load(self.GameState.currentEnemy + '.gif')
         image_monster_rect = image_monster.get_rect(center=(int(width*0.675),int(height*0.3)))
@@ -735,7 +719,7 @@ class UserInterface():
         text_player_mp = self.font.render(('MP: ' + str(self.GameState.playerCurrentMP) + '/' + str(self.GameState.playerMaxMP)), False, (0, 0, 0))
         self.window.blit(text_player_mp,(int(width*0.2),int(height*0.515)))
 
-        #Floating Damage Descriptors
+        #Damage Descriptors
         text_player_damage = self.fontBig.render(('-' + str(self.GameState.playerNextDamage)), False, (255, 0, 0))
         self.window.blit(text_player_damage,(int(width*0.6),int(height*0.4)))
         text_monster_damage = self.fontBig.render(('-' + str(self.GameState.playerDamageTaken)), False, (255, 0, 0))
@@ -755,10 +739,6 @@ class UserInterface():
         for x in range(self.GameState.playerInventorySize):
             image_empty_rect = image_empty.get_rect(center=(int(width*0.825)+(x%4)*int(width*0.05),int(height*0.075)+int(x/4)*int(height*0.05)))
             self.window.blit(image_empty,image_empty_rect)
-
-
-
-
 
         #Current Equips
         pygame.draw.rect(self.window,(192,192,192),(0,0,width*0.175,height*0.225))
@@ -887,6 +867,8 @@ class UserInterface():
 
         pygame.display.update()
 
+
+    #Inputs when you're on the Menu
     def processMenuInput(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -907,6 +889,8 @@ class UserInterface():
                     self.onControls = True
                     break
 
+
+    #Menu UI
     def menuUI(self):
         #Make screen white
         self.window.fill((255,255,255))
@@ -945,7 +929,7 @@ class UserInterface():
 
         pygame.display.update()
 
-
+    #Control Screen UI
     def controlsUI(self):
         self.window.fill((255,255,255))
 
@@ -978,6 +962,7 @@ class UserInterface():
 
         pygame.display.update()
 
+    #Control Screen Inputs
     def processControlsInput(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -990,6 +975,8 @@ class UserInterface():
                     self.onControls = False
                     break
 
+
+    #The Everything Loop
     def run(self):
         while self.running:
 
