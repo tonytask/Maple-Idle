@@ -17,8 +17,7 @@ Press Down to swap to Normal monster
 
 Press 1 to use "Power Strike"
 
-Items that you loot appear on the top right
+Press on Item in Inventory to Equip It
 
-Press on the left 75% to equip the item
+Hover over an Item in the Inventory and Press D to Destroy It
 
-Press on the right 25% to destroy the item
