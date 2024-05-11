@@ -1,12 +1,14 @@
 # Maple-Idle
 1. Introduction
 
-Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. The game is primarily and incremental idle RPG.
+Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. The game is primarily an incremental idle RPG. 
 
 
 2. Features
 
 Multiple Monsters and Bosses to Battle
+
+Stat Point System (Strength primarily increases damage and health regeneration, Dexterity primarily increases your chance to hit monsters)
 
 Equipment Progression
 
