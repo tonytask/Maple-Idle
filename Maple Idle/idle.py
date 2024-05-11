@@ -23,27 +23,30 @@ boss_list = ['Mano', 'Stumpy']
 #3: EXP
 #4: Mesos
 #5: Kill Count
-monster_table = {'Snail': [1,8,12,3,6,0],
-                 'Blue Snail': [2,15,18,4,12,0],
-                 'Shroom': [2,20,24,5,12,0],
-                 'Red Snail': [5,40,35,8,18,0],
-                 'Slime': [6,50,42,10,20,0],
-                 'Orange Mushroom': [8,80,52,15,24,0],
-                 'Ribbon Pig': [10,120,66,20,30,0],
-                 'Octopus': [12,200,76,24,36,0],
-                 'Bubbling': [15,240,80,26,36,0],
-                 'Green Mushroom': [15,250,82,26,42,0],
-                 'Horny Mushroom': [22,300,90,35,54,0],
-                 'Evil Eye': [27,720,100,50,72,0]}
-
-boss_table = {'Mano': [20,2000,125,200,200,0],
-              'Stumpy': [35,3500,175,350,350,0]}
+#6: Avoidability
+monster_table = {'Snail': [1,8,12,3,6,0,0],
+                 'Blue Snail': [2,15,18,4,12,0,0],
+                 'Shroom': [2,20,24,5,12,0,0],
+                 'Red Snail': [5,40,35,8,18,0,0],
+                 'Slime': [6,50,42,10,20,0,1],
+                 'Orange Mushroom': [8,80,52,15,24,0,1],
+                 'Ribbon Pig': [10,120,66,20,30,0,2],
+                 'Octopus': [12,200,76,24,36,0,4],
+                 'Bubbling': [15,240,80,26,36,0,10],
+                 'Green Mushroom': [15,250,82,26,42,0,5],
+                 'Horny Mushroom': [22,300,90,35,54,0,7],
+                 'Evil Eye': [27,720,100,50,72,0,10],
+                 
+                 #bosses
+                'Mano': [20,2000,125,200,200,0,8],
+                'Stumpy': [35,3500,175,350,350,0,12]
+                 }
 
 boss_timer = {'Mano': 0, 'Stumpy': 0}
 
 #Loot Table for Monster
 #Number/10000 represents Probability of Item Dropping
-drop_table = {'Snail': {25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green Headband',},
+drop_table = {'Snail': {10: 'Hat Scroll DEF 10%',25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green Headband',},
                'Blue Snail': {25: 'Grey Thick Sweat Pants',50: 'Blue One-Lined T-Shirt', 125: 'White Undershirt +1'},
                'Shroom': {25: 'Ice Jeans',40:'Hat Scroll DEF 100%', 125: 'Jean Capris'},
                'Red Snail': {10: 'Wooden Sword +3', 25:'Glove Scroll ATT 10%',80: 'Wooden Sword'},
@@ -52,83 +55,96 @@ drop_table = {'Snail': {25:'Glove Scroll ATT 100%',50: 'Work Gloves',125: 'Green
                'Ribbon Pig': {25: 'Orange Sporty T-Shirt +2', 110: 'Orange Sporty T-Shirt', 200: 'Work Gloves'},
                'Octopus': {40: 'Brown Corporal',70: 'Brown Corporal Pants', 125: 'Aqua Snowboard'},
                'Bubbling': {10:'Glove Scroll ATT 60%',25: 'Fish Spear +1', 75: 'Fish Spear'},
-               'Green Mushroom': {25:'Work Gloves +2',50: 'White Starry Bandana'},
+               'Green Mushroom': {10: 'Glove Scroll ATT 70%', 25:'Work Gloves +2',50: 'White Starry Bandana'},
                'Horny Mushroom': {20: 'Iron Burgernet Helm',35:'Warfare Pants', 60: 'Red Whitebottom Shoes'},
-               'Evil Eye': {25: 'Maple Sword', 50: 'Maple Cape'},
+               'Evil Eye': {20: 'Maple Sword',35:'Glove Scroll ATT 70%', 60: 'Maple Cape'},
 
 
                #bosses
-               'Mano': {100: 'Cutlus', 500: 'Work Gloves +3'},
-               'Stumpy': {500: 'Dark Knuckle +2'}}
+               'Mano': {100: 'Cutlus', 250: 'Glove Scroll ATT 30%',500: 'Work Gloves +3'},
+               'Stumpy': {300: 'Glove Scroll ATT 30%',500: 'Dark Knuckle +2'}}
 
 #Exp Table
 exp_to_next_level = {1: 15, 2:34, 3:57, 4:92, 5:135, 6:372, 7:560, 8:840, 9:1242, 10:1144,
                     11:1573,12:2144,13:2800,14:3640,15:4700,16:5893,17:7360,18:9144, 
                     19:11120,20:13477,21:16268,22:19320,23:22880,24:27008,25:31477,
-                    26:36600,27:42444,28:48720,29:55813,30:63800}
+                    26:36600,27:42444,28:48720,29:55813,30:63800,31:86784,32:98208,
+                    33:110932,34:124432,35:139372,36:155865,37:173280,38:192400,
+                    39:213345,40:235372,41:259392,42:285532,43:312928,44:342624,
+                    45:374760,46:408336,47:445544,38:483532,49:524160,50:567772}
 
 
+#List of all droppable items  
+#key = item name
+#[0] = item type
+#[1] = strength
+#[2] = weapon attack
+#[3] = armor
+#[4] = upgrade slots/ scroll success rate
+#[5] = 0/scroll type
+#[6] = dexterity
 
-
-#List of all droppable items              
                #hat
-drop_list = {'Empty': ['Hat', 0,0,0,0,0],
-              'Green Headband': ['Hat',0,0,5,7,0],
-              'White Bandana': ['Hat',0,0,8,7,0],
-              'Bronze Koif': ['Hat',0,0,10,7,0],
-              'White Starry Bandana': ['Hat',0,0,15,7,0],
-              'Iron Burgernet Helm': ['Hat',0,0,25,7,0],
+drop_list = {'Empty': ['Hat', 0,0,0,0,0,0],
+              'Green Headband': ['Hat',0,0,5,7,0,0],
+              'White Bandana': ['Hat',0,0,8,7,0,0],
+              'Bronze Koif': ['Hat',0,0,10,7,0,0],
+              'White Starry Bandana': ['Hat',0,0,15,7,0,0],
+              'Iron Burgernet Helm': ['Hat',0,0,25,7,0,0],
 
                 #top
-                'White Undershirt': ['Top',0,0,3,7,0], 
-                'Blue One-Lined T-Shirt': ['Top',0,0,11,7,0],
-                'White Undershirt +1': ['Top',0,0,5,0,0], 
-                'Orange Sporty T-Shirt': ['Top',0,0,11,7,0], 
-                'Orange Sporty T-Shirt +2': ['Top',4,0,11,0,0],
-                'Brown Corporal': ['Top',0,0,20,7,0],
+                'White Undershirt': ['Top',0,0,3,7,0,0], 
+                'Blue One-Lined T-Shirt': ['Top',0,0,11,7,0,0],
+                'White Undershirt +1': ['Top',0,0,5,0,0,0], 
+                'Orange Sporty T-Shirt': ['Top',0,0,11,7,0,0], 
+                'Orange Sporty T-Shirt +2': ['Top',4,0,11,0,0,0],
+                'Brown Corporal': ['Top',0,0,20,7,0,0],
 
                 #bottom
-                'Blue Jean Shorts': ['Bottom',0,0,2,7,0], 
-                'Jean Capris': ['Bottom',0,0,5,7,0],
-                'Grey Thick Sweat Pants': ['Bottom',0,0,10,7,0], 
-                'Ice Jeans': ['Bottom',0,0,13,7,0], 
-                'Brown Corporal Pants': ['Bottom',0,0,16,7,0], 
-                'Warfare Pants': ['Bottom',0,0,19,7,0],
+                'Blue Jean Shorts': ['Bottom',0,0,2,7,0,0], 
+                'Jean Capris': ['Bottom',0,0,5,7,0,0],
+                'Grey Thick Sweat Pants': ['Bottom',0,0,10,7,0,0], 
+                'Ice Jeans': ['Bottom',0,0,13,7,0,0], 
+                'Brown Corporal Pants': ['Bottom',0,0,16,7,0,0], 
+                'Warfare Pants': ['Bottom',0,0,19,7,0,0],
 
                 #gloves
-                'Work Gloves': ['Gloves',0,0,2,5,0],
-                'Work Gloves +1': ['Gloves',0,2,2,0,0], 
-                'Work Gloves +2': ['Gloves',0,4,2,0,0],
-                'Work Gloves +3': ['Gloves',0,6,2,0,0],
-                'Dark Knuckle +2': ['Gloves',3,4,17,0,0],
+                'Work Gloves': ['Gloves',0,0,2,5,0,0],
+                'Work Gloves +1': ['Gloves',0,2,2,0,0,0], 
+                'Work Gloves +2': ['Gloves',0,4,2,0,0,0],
+                'Work Gloves +3': ['Gloves',0,6,2,0,0,0],
+                'Dark Knuckle +2': ['Gloves',3,4,17,0,0,0],
 
                 #shoes
-                'Leather Sandals': ['Shoes',0,0,2,5,0], 
-                'White Gomushin': ['Shoes',0,0,4,5,0], 
-                'Bronze Aroa Boots': ['Shoes',0,0,7,5,0], 
-                'Red Whitebottom Shoes': ['Shoes',0,0,13,5,0],
+                'Leather Sandals': ['Shoes',0,0,2,5,0,0], 
+                'White Gomushin': ['Shoes',0,0,4,5,0,0], 
+                'Bronze Aroa Boots': ['Shoes',0,0,7,5,0,0], 
+                'Red Whitebottom Shoes': ['Shoes',0,0,13,5,0,0],
 
                 #cape
-                'Maple Cape': ['Cape',0,0,5,5,0],
+                'Maple Cape': ['Cape',0,0,5,5,0,0],
 
                 #weapon
-                'Sword': ['Weapon',0,17,0,7,0], 
-                'Wooden Sword': ['Weapon',0,30,0,7,0], 
-                'Wooden Sword +3': ['Weapon',3,36,0,0,0],
-                'Aqua Snowboard': ['Weapon',0,30,0,7,0], 
-                'Spear': ['Weapon',0,32,0,7,0], 
-                'Fork on a Stick': ['Weapon',0,37,0,7,0],
-                'Iron Axe': ['Weapon',0,37,0,7,0], 
-                'Fish Spear': ['Weapon',0,40,0,7,0],
-                'Fish Spear +1': ['Weapon',1,42,0,0,0], 
-                'Maple Sword': ['Weapon',0,48,0,7,0],
-                'Cutlus': ['Weapon',0,52,0,7,0],
+                'Sword': ['Weapon',0,17,0,7,0,0], 
+                'Wooden Sword': ['Weapon',0,30,0,7,0,0], 
+                'Wooden Sword +3': ['Weapon',3,36,0,0,0,0],
+                'Aqua Snowboard': ['Weapon',0,30,0,7,0,0], 
+                'Spear': ['Weapon',0,32,0,7,0,0], 
+                'Fork on a Stick': ['Weapon',0,37,0,7,0,0],
+                'Iron Axe': ['Weapon',0,37,0,7,0,0], 
+                'Fish Spear': ['Weapon',0,40,0,7,0,0],
+                'Fish Spear +1': ['Weapon',1,42,0,0,0,0], 
+                'Maple Sword': ['Weapon',0,48,0,7,0,0],
+                'Cutlus': ['Weapon',0,52,0,7,0,0],
 
                 #scroll
-                'Glove Scroll ATT 100%': ['Scroll',0,1,0,100,'Gloves'],
-                'Glove Scroll ATT 60%': ['Scroll',0,2,0,60,'Gloves'],
-                'Glove Scroll ATT 10%': ['Scroll',0,3,0,10,'Gloves'],
-                'Hat Scroll DEF 100%': ['Scroll',0,0,1,100,'Hat']
+                'Glove Scroll ATT 100%': ['Scroll',0,1,0,100,'Gloves',0],
+                'Glove Scroll ATT 60%': ['Scroll',0,2,0,60,'Gloves',0],
+                'Glove Scroll ATT 10%': ['Scroll',0,3,0,10,'Gloves',0],
+                'Glove Scroll ATT 70%': ['Scroll',0,2,0,70,'Gloves',0],
+                'Glove Scroll ATT 30%': ['Scroll',0,3,0,70,'Gloves',0],
+                'Hat Scroll DEF 100%': ['Scroll',0,0,1,100,'Hat',0],
+                'Hat Scroll DEF 10%': ['Scroll',0,0,5,10,'Hat',1]
               }
 
 #The game's variables and functions
@@ -145,6 +161,9 @@ class GameState():
         self.currentEXP = 0
         self.playerStrength = 12
         self.playerTotalStrength = 12
+        self.playerDexterity = 4
+        self.playerTotalDexterity = 4
+        self.statPoints = 0
         self.playerLevel = 1
         self.playerCurrentHP = 50
         self.playerMaxHP = 50
@@ -172,13 +191,13 @@ class GameState():
         self.expMin = 0
 
         #Equipment
-        self.playerEquips = {'Weapon':['Sword', 'Weapon', 0, 17, 0, 7],'Top':['White Undershirt', 'Top', 0, 0, 3, 7],'Bottom':['Blue Jean Shorts','Bottom',0,0,2,7],
-                             'Gloves':['Empty', 'Gloves',0,0,0,0],'Hat':['Empty', 'Hat', 0,0,0,0],
-                             'Shoes':['Leather Sandals', 'Shoes',0,0,2,5], 'Cape':['Empty','Cape',0,0,0,0]}
+        self.playerEquips = {'Weapon':['Sword', 'Weapon', 0, 17, 0, 7,0],'Top':['White Undershirt', 'Top', 0, 0, 3, 7,0],'Bottom':['Blue Jean Shorts','Bottom',0,0,2,7,0],
+                             'Gloves':['Empty', 'Gloves',0,0,0,0,0],'Hat':['Empty', 'Hat', 0,0,0,0,0],
+                             'Shoes':['Leather Sandals', 'Shoes',0,0,2,5,0], 'Cape':['Empty','Cape',0,0,0,0,0]}
 
         self.playerArmor = self.playerEquips['Hat'][4] + self.playerEquips['Top'][4] + self.playerEquips['Bottom'][4] + self.playerEquips['Shoes'][4] + self.playerEquips['Weapon'][4] + self.playerEquips['Gloves'][4] + self.playerEquips['Cape'][4]
         self.playerWA = self.playerEquips['Hat'][3] + self.playerEquips['Top'][3] + self.playerEquips['Bottom'][3] + self.playerEquips['Shoes'][3] + self.playerEquips['Weapon'][3] + self.playerEquips['Gloves'][3] + self.playerEquips['Cape'][3]
-        self.playerMaxDamage = int(self.playerWA * self.playerTotalStrength * 4 / 100)
+        self.playerMaxDamage = int((4*self.playerTotalStrength+self.playerTotalDexterity)*self.playerWA/100)
 
         #Skills
         self.powerStrikeCost = 10
@@ -197,6 +216,9 @@ class GameState():
         data['self.currentEXP'] = self.currentEXP
         data['self.playerStrength'] = self.playerStrength
         data['self.playerTotalStrength'] = self.playerTotalStrength
+        data['self.playerDexterity'] = self.playerDexterity
+        data['self.playerTotalDexterity'] = self.playerTotalDexterity
+        data['self.statPoints'] = self.statPoints
         data['self.playerLevel'] = self.playerLevel
         data['self.playerCurrentHP'] = self.playerCurrentHP
         data['self.playerMaxHP'] = self.playerMaxHP
@@ -225,9 +247,9 @@ class GameState():
             if(len(boss_list)>self.bossCounter+1):
                 self.bossCounter += 1
             self.currentEnemy = boss_list[self.bossCounter]
-            self.monsterCurrentHP = boss_table[self.currentEnemy][1]
-            self.monsterAttack = boss_table[self.currentEnemy][2]
-            self.monsterLevel = boss_table[self.currentEnemy][0]
+            self.monsterCurrentHP = monster_table[self.currentEnemy][1]
+            self.monsterAttack = monster_table[self.currentEnemy][2]
+            self.monsterLevel = monster_table[self.currentEnemy][0]
         else:
             if(len(monster_list)>self.mobCounter+1):
                 self.mobCounter += 1
@@ -242,9 +264,9 @@ class GameState():
             if(self.bossCounter < 0):
                 self.bossCounter = 0
             self.currentEnemy = boss_list[self.bossCounter]
-            self.monsterCurrentHP = boss_table[self.currentEnemy][1]
-            self.monsterAttack = boss_table[self.currentEnemy][2]
-            self.monsterLevel = boss_table[self.currentEnemy][0]
+            self.monsterCurrentHP = monster_table[self.currentEnemy][1]
+            self.monsterAttack = monster_table[self.currentEnemy][2]
+            self.monsterLevel = monster_table[self.currentEnemy][0]
 
         else:
             self.mobCounter -= 1
@@ -258,17 +280,17 @@ class GameState():
     def selectBossMob(self):
         self.isBoss = True
         self.currentEnemy = boss_list[self.bossCounter]
-        self.monsterCurrentHP = boss_table[self.currentEnemy][1]
-        self.monsterAttack = boss_table[self.currentEnemy][2]
-        self.monsterLevel = boss_table[self.currentEnemy][0]
+        self.monsterCurrentHP = monster_table[self.currentEnemy][1]
+        self.monsterAttack = monster_table[self.currentEnemy][2]
+        self.monsterLevel = monster_table[self.currentEnemy][0]
 
     def levelUp(self):
         self.currentEXP -= exp_to_next_level[self.playerLevel]
         self.playerLevel+=1
-        self.playerStrength+=5
+        self.statPoints +=5
         self.playerSP+=3
         self.playerMaxMP += (5 + int(self.playerLevel/3))
-        self.playerMaxHP += (14+int(self.playerTotalStrength/10))
+        self.playerMaxHP += (14+int(self.playerTotalStrength/9))
         self.playerHPRecovery = int(self.playerTotalStrength/10)
 
     def monsterDie(self):
@@ -281,10 +303,10 @@ class GameState():
                 self.levelUp()
         else:
             boss_timer[self.currentEnemy] += 600
-            self.monsterCurrentHP = boss_table[self.currentEnemy][1]
-            self.currentEXP+= boss_table[self.currentEnemy][3]
-            boss_table[self.currentEnemy][5]+=1
-            self.expCount[self.expMin]=boss_table[self.currentEnemy][3]
+            self.monsterCurrentHP = monster_table[self.currentEnemy][1]
+            self.currentEXP+= monster_table[self.currentEnemy][3]
+            monster_table[self.currentEnemy][5]+=1
+            self.expCount[self.expMin]=monster_table[self.currentEnemy][3]
             if self.currentEXP>= exp_to_next_level[self.playerLevel]:
                 self.levelUp()
 
@@ -297,8 +319,8 @@ class GameState():
                 if(key>lootRoll):
                     if(self.playerInventoryCount < self.playerInventorySize):
                         print('You looted',drop_table[self.currentEnemy][key])
-                        #Item name, Item Type, Strength, WA, Armor, Upgrade Slots, Scroll Detect
-                        self.itemObj = ['Empty','Hat',0,0,0,0,0]
+                        #Item name, Item Type, Strength, WA, Armor, Upgrade Slots, Scroll Detect,Dexterity
+                        self.itemObj = ['Empty','Hat',0,0,0,0,0,0]
                         self.itemObj[0] = drop_table[self.currentEnemy][key]
                         self.itemObj[1] = drop_list[drop_table[self.currentEnemy][key]][0]
                         self.itemObj[2] = drop_list[drop_table[self.currentEnemy][key]][1]
@@ -306,6 +328,7 @@ class GameState():
                         self.itemObj[4] = drop_list[drop_table[self.currentEnemy][key]][3]
                         self.itemObj[5] = drop_list[drop_table[self.currentEnemy][key]][4]
                         self.itemObj[6] = drop_list[drop_table[self.currentEnemy][key]][5]
+                        self.itemObj[7] = drop_list[drop_table[self.currentEnemy][key]][6]
                         self.InventoryR.append(self.itemObj)
                         
                         self.playerInventoryCount +=1
@@ -313,13 +336,13 @@ class GameState():
                     else:
                         print('Your inventory is full. Please remove an item')
         else:
-            self.playerMeso += random.randint(int(boss_table[self.currentEnemy][4]*2/3),boss_table[self.currentEnemy][4])
+            self.playerMeso += random.randint(int(monster_table[self.currentEnemy][4]*2/3),monster_table[self.currentEnemy][4])
             lootRoll = random.randint(1,10000)
 
             for key in drop_table[self.currentEnemy]:
                 if(key>lootRoll):
                     if(self.playerInventoryCount < self.playerInventorySize):
-                        self.itemObj = ['Empty','Hat',0,0,0,0]
+                        self.itemObj = ['Empty','Hat',0,0,0,0,0,0]
                         self.itemObj[0] = drop_table[self.currentEnemy][key]
                         self.itemObj[1] = drop_list[drop_table[self.currentEnemy][key]][0]
                         self.itemObj[2] = drop_list[drop_table[self.currentEnemy][key]][1]
@@ -327,13 +350,14 @@ class GameState():
                         self.itemObj[4] = drop_list[drop_table[self.currentEnemy][key]][3]
                         self.itemObj[5] = drop_list[drop_table[self.currentEnemy][key]][4]
                         self.itemObj[6] = drop_list[drop_table[self.currentEnemy][key]][5]
+                        self.itemObj[7] = drop_list[drop_table[self.currentEnemy][key]][6]
                         self.InventoryR.append(self.itemObj)
                         
                         self.playerInventoryCount +=1
                         break
 
     def damageRoll(self):
-        self.playerMaxDamage = int(self.playerWA * self.playerTotalStrength * 4 / 100)
+        self.playerMaxDamage = int((4*self.playerTotalStrength+self.playerTotalDexterity)*self.playerWA/100)
         self.playerNextDamage = random.randint(1,self.playerMaxDamage)
         if self.playerNextDamage < self.playerMaxDamage / 10:
             self.playerNextDamage = int(self.playerMaxDamage / 10)
@@ -343,9 +367,22 @@ class GameState():
         if((self.isBoss == True) and (boss_timer[self.currentEnemy] > 0)):
             return
         else:
+            if(monster_table[self.currentEnemy][6]==0):
+                self.monsterCurrentHP -= self.playerNextDamage
+                return
+            lvlDiff = self.playerLevel - monster_table[self.currentEnemy][0]
+            if(lvlDiff<0):
+                lvlDiff = 0
+            chanceToHit = self.playerTotalDexterity*1.25/((1.84+0.07*lvlDiff)*monster_table[self.currentEnemy][6])-1
+            chanceToHit = int(chanceToHit*100)
+            if(chanceToHit<1):
+                self.playerNextDamage = 0
+            elif(random.randint(1,100)>chanceToHit):
+                self.playerNextDamage = 0
             self.monsterCurrentHP -= self.playerNextDamage
 
     def recoverHP(self):
+        self.playerHPRecovery = int(self.playerTotalStrength/10)
         if(self.playerCurrentHP<self.playerMaxHP):
             self.playerCurrentHP += self.playerHPRecovery
             if(self.playerCurrentHP>self.playerMaxHP):
@@ -367,13 +404,14 @@ class GameState():
         if(self.isBoss == False):
             self.monsterCurrentHP = monster_table[self.currentEnemy][1]
         else:
-            self.monsterCurrentHP = boss_table[self.currentEnemy][1]
+            self.monsterCurrentHP = monster_table[self.currentEnemy][1]
 
     def updateStats(self):
         self.playerTotalStrength = self.playerEquips['Hat'][2] + self.playerEquips['Top'][2] + self.playerEquips['Bottom'][2] + self.playerEquips['Shoes'][2] + self.playerEquips['Weapon'][2] + self.playerEquips['Gloves'][2] + self.playerEquips['Cape'][2] + self.playerStrength
+        self.playerTotalDexterity = self.playerEquips['Hat'][6] + self.playerEquips['Top'][6] + self.playerEquips['Bottom'][6] + self.playerEquips['Shoes'][6] + self.playerEquips['Weapon'][6] + self.playerEquips['Gloves'][6] + self.playerEquips['Cape'][6] + self.playerDexterity
         self.playerArmor = self.playerEquips['Hat'][4] + self.playerEquips['Top'][4] + self.playerEquips['Bottom'][4] + self.playerEquips['Shoes'][4] + self.playerEquips['Weapon'][4] + self.playerEquips['Gloves'][4] + self.playerEquips['Cape'][4]
         self.playerWA = self.playerEquips['Hat'][3] + self.playerEquips['Top'][3] + self.playerEquips['Bottom'][3] + self.playerEquips['Shoes'][3] + self.playerEquips['Weapon'][3] + self.playerEquips['Gloves'][3] + self.playerEquips['Cape'][3]
-        self.playerMaxDamage = int(self.playerWA * self.playerTotalStrength * 4 / 100)
+        self.playerMaxDamage = int((4*self.playerTotalStrength+self.playerTotalDexterity)*self.playerWA/100)
 
     def loadGame(self):
         
@@ -388,6 +426,9 @@ class GameState():
         self.currentEXP = data['self.currentEXP']
         self.playerStrength = data['self.playerStrength']
         self.playerTotalStrength = data['self.playerTotalStrength']
+        self.playerDexterity = data['self.playerDexterity']
+        self.playerTotalDexterity = data['self.playerTotalDexterity']
+        self.statPoints = data['self.statPoints']
         self.playerLevel = data['self.playerLevel']
         self.playerCurrentHP = data['self.playerCurrentHP']
         self.playerMaxHP = data['self.playerMaxHP']
@@ -473,6 +514,14 @@ class UserInterface():
                 self.running = False
                 break
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                if(int(width*0.2)<=self.mouse[0]< (int(width*0.225))and (int(height*0.76)<= self.mouse[1] < int(height*0.785))):
+                    if(self.GameState.statPoints>0):
+                        self.GameState.playerStrength +=1
+                        self.GameState.statPoints -=1
+                elif(int(width*0.2)<=self.mouse[0]< (int(width*0.225))and (int(height*0.785)<= self.mouse[1] < int(height*0.81))):
+                    if(self.GameState.statPoints>0):
+                        self.GameState.playerDexterity +=1
+                        self.GameState.statPoints -=1
                 for a in range((self.GameState.playerInventoryCount)):
                         if(self.image_item_rect[a].x<=self.mouse[0]< (self.image_item_rect[a].x+int(self.image_item_rect[a].width)) and (self.image_item_rect[a].y<= self.mouse[1] < self.image_item_rect[a].y+int(self.image_item_rect[a].height))):
                             if(self.GameState.InventoryR[a][1] == 'Hat'):
@@ -553,7 +602,6 @@ class UserInterface():
                                     self.GameState.InventoryR[a] =temp
                                     break
                             elif(self.GameState.InventoryR[a][1] == 'Scroll'):
-                                print(self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5])
                                 if(self.GameState.playerEquips[self.GameState.InventoryR[a][6]][0] == 'Empty'):
                                     print('No '+self.GameState.playerEquips[self.GameState.InventoryR[a][6]][1]+' Equipped')
                                 elif(self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5]==0):
@@ -566,13 +614,20 @@ class UserInterface():
                                         self.GameState.playerEquips[self.GameState.InventoryR[a][6]][3] +=self.GameState.InventoryR[a][3]
                                         self.GameState.playerEquips[self.GameState.InventoryR[a][6]][4] +=self.GameState.InventoryR[a][4]
                                         self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5] -= 1
-                                        self.GameState.InventoryR.pop(a)
-                                        self.GameState.playerInventoryCount-=1
                                     else:
-                                        print("Scroll failed")
-                                        self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5] -= 1
-                                        self.GameState.InventoryR.pop(a)
-                                        self.GameState.playerInventoryCount-=1
+                                        if(self.GameState.InventoryR[a][5]== 70 or self.GameState.InventoryR[a][5] ==30):
+                                            boom = random.randint(1,2)
+                                            if(boom == 1):
+                                                self.GameState.playerEquips[self.GameState.InventoryR[a][6]] = ['Empty', self.GameState.InventoryR[a][6], 0,0,0,0]
+                                                print("The scroll's power destroyed the item")
+                                            else:
+                                                print("Scroll failed")
+                                                self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5] -= 1
+                                        else:
+                                            print("Scroll failed")
+                                            self.GameState.playerEquips[self.GameState.InventoryR[a][6]][5] -= 1
+                                    self.GameState.InventoryR.pop(a)
+                                    self.GameState.playerInventoryCount-=1
                                 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -596,7 +651,7 @@ class UserInterface():
                 elif event.key == pygame.K_1:
                     if(not self.GameState.playerIsDead):
                         if(self.GameState.playerCurrentMP>= self.GameState.powerStrikeCost):
-                            if(self.GameState.isBoss == True and boss_timer[self.GameState.currentEnemy]>= 0):
+                            if(self.GameState.isBoss == True and boss_timer[self.GameState.currentEnemy]> 0):
                                 return
                             else:
                                 self.GameState.playerCurrentMP -= self.GameState.powerStrikeCost
@@ -624,26 +679,46 @@ class UserInterface():
         #Player Stats Descriptors
         pygame.draw.rect(self.window,(192,192,192),(0,height-int(height*0.3),int(width*0.20),int(height*0.3)))
 
+
+            #Stat Point Upgrade Graphics
+        if(self.GameState.statPoints >0):
+            pygame.draw.rect(self.window,(135,206,250),(int(width*0.20),int(height*0.76),int(width*0.025),int(height*0.025)))
+            text_adds = self.font.render(('+'), False, (0, 0, 0))
+            self.window.blit(text_adds,(int(width*0.2075),int(height*0.76)))
+            pygame.draw.rect(self.window,(135,206,250),(int(width*0.20),int(height*0.785),int(width*0.025),int(height*0.025)))
+            text_adds = self.font.render(('+'), False, (0, 0, 0))
+            self.window.blit(text_adds,(int(width*0.2075),int(height*0.785)))
+            if(int(width*0.2)<=self.mouse[0]< (int(width*0.225))and (int(height*0.76)<= self.mouse[1] < int(height*0.785))):
+                    pygame.draw.rect(self.window,(128,128,128),(int(width*0.20),int(height*0.76),int(width*0.025),int(height*0.025)))
+                    text_adds = self.font.render(('+'), False, (0, 0, 0))
+                    self.window.blit(text_adds,(int(width*0.2075),int(height*0.76)))
+            elif(int(width*0.2)<=self.mouse[0]< (int(width*0.225))and (int(height*0.785)<= self.mouse[1] < int(height*0.81))):
+                    pygame.draw.rect(self.window,(128,128,128),(int(width*0.20),int(height*0.785),int(width*0.025),int(height*0.025)))
+                    text_adds = self.font.render(('+'), False, (0, 0, 0))
+                    self.window.blit(text_adds,(int(width*0.2075),int(height*0.785)))
         text_level = self.fontBig.render(('Level: '+str(self.GameState.playerLevel)), False, (0, 0, 0))
         self.window.blit(text_level,(0,int(height*0.71)))
 
-        text_strength = self.font.render(('Strength: '+str(self.GameState.playerTotalStrength)), False, (0, 0, 0))
+        text_strength = self.font.render(('STR: '+str(self.GameState.playerTotalStrength)), False, (0, 0, 0))
         self.window.blit(text_strength,(0,int(height*0.76)))
 
+        text_dex = self.font.render(('DEX: '+str(self.GameState.playerTotalDexterity)), False, (0, 0, 0))
+        self.window.blit(text_dex,(0,int(height*0.785)))
+
         text_wa = self.font.render(('Weapon Attack: '+str(self.GameState.playerWA)), False, (0, 0, 0))
-        self.window.blit(text_wa,(0,int(height*0.785)))
+        self.window.blit(text_wa,(0,int(height*0.81)))
 
         text_damage_range = self.font.render(('Damage: ' + str(int(self.GameState.playerMaxDamage/10))+'-'+str(self.GameState.playerMaxDamage)),False,(0,0,0))
-        self.window.blit(text_damage_range,(0,int(height*0.81)))
+        self.window.blit(text_damage_range,(0,int(height*0.835)))
 
         text_armor = self.font.render(('Armor: '+str(self.GameState.playerArmor)), False, (0, 0, 0))
-        self.window.blit(text_armor,(0,int(height*0.835)))
+        self.window.blit(text_armor,(0,int(height*0.86)))
 
-        text_sp = self.font.render(('Skill Points: '+str(self.GameState.playerSP)), False, (0, 0, 0))
-        self.window.blit(text_sp,(0,int(height*0.86)))
+        text_sp = self.font.render(('Stat Points: '+str(self.GameState.statPoints)), False, (0, 0, 0))
+        self.window.blit(text_sp,(0,int(height*0.885)))
 
         text_meso = self.font.render(('Meso: ' + str(self.GameState.playerMeso)), False, (0,0,0))
-        self.window.blit(text_meso,(0,int(height*0.885)))
+        self.window.blit(text_meso,(0,int(height*0.91)))
         
         pygame.draw.rect(self.window,(0,0,0),(0,int(height*0.97),int(width*0.2),height*0.03))
         pygame.draw.rect(self.window,(0,255,0),(0,int(height*0.97),int(self.GameState.currentEXP/exp_to_next_level[self.GameState.playerLevel]*width*0.2),height*0.03))
@@ -684,8 +759,8 @@ class UserInterface():
                 text_boss_time = self.font.render(str(int(boss_timer[self.GameState.currentEnemy]/60))+ ':' + str(boss_timer[self.GameState.currentEnemy]%60), False, (0,0,0))
                 self.window.blit(text_boss_time, (int(width*0.6),int(height*0.35)))
 
-            pygame.draw.rect(self.window,(255,0,0),(int(width*0.6),int(height*0.44),int(self.GameState.monsterCurrentHP/boss_table[self.GameState.currentEnemy][1]*width*0.15),height*0.03))
-            text_enemy_hp = self.font.render(('HP: '+str(self.GameState.monsterCurrentHP)+'/'+str(boss_table[self.GameState.currentEnemy][1])), False, (255, 255, 255))
+            pygame.draw.rect(self.window,(255,0,0),(int(width*0.6),int(height*0.44),int(self.GameState.monsterCurrentHP/monster_table[self.GameState.currentEnemy][1]*width*0.15),height*0.03))
+            text_enemy_hp = self.font.render(('HP: '+str(self.GameState.monsterCurrentHP)+'/'+str(monster_table[self.GameState.currentEnemy][1])), False, (255, 255, 255))
             self.window.blit(text_enemy_hp,(int(width*0.61),int(height*0.445)))
 
             text_enemy = self.font.render(('Monster: '+self.GameState.currentEnemy), False, (0, 0, 0))
@@ -697,13 +772,13 @@ class UserInterface():
             text_enemy_att = self.font.render(('Attack: '+str(self.GameState.monsterAttack)), False, (0, 0, 0))
             self.window.blit(text_enemy_att,(int(width*0.6),int(height*0.525)))
 
-            text_enemy_exp = self.font.render(('Exp: '+str(boss_table[self.GameState.currentEnemy][3])), False, (0, 0, 0))
+            text_enemy_exp = self.font.render(('Exp: '+str(monster_table[self.GameState.currentEnemy][3])), False, (0, 0, 0))
             self.window.blit(text_enemy_exp,(int(width*0.6),int(height*0.55)))
 
-            text_enemy_meso = self.font.render(('Meso: '+str(int(boss_table[self.GameState.currentEnemy][4]*2/3))+'-'+str(boss_table[self.GameState.currentEnemy][4])), False, (0, 0, 0))
+            text_enemy_meso = self.font.render(('Meso: '+str(int(monster_table[self.GameState.currentEnemy][4]*2/3))+'-'+str(monster_table[self.GameState.currentEnemy][4])), False, (0, 0, 0))
             self.window.blit(text_enemy_meso,(int(width*0.6),int(height*0.575)))
 
-            text_enemy_kc = self.font.render(('Kill Count: '+str(boss_table[self.GameState.currentEnemy][5])), False, (0, 0, 0))
+            text_enemy_kc = self.font.render(('Kill Count: '+str(monster_table[self.GameState.currentEnemy][5])), False, (0, 0, 0))
             self.window.blit(text_enemy_kc,(int(width*0.6),int(height*0.60)))
 
         text_expmin = self.font.render(('Exp/Min: '+str(sum(self.GameState.expCount))), False, (0, 0, 0))
@@ -720,10 +795,14 @@ class UserInterface():
         self.window.blit(text_player_mp,(int(width*0.2),int(height*0.515)))
 
         #Damage Descriptors
-        text_player_damage = self.fontBig.render(('-' + str(self.GameState.playerNextDamage)), False, (255, 0, 0))
-        self.window.blit(text_player_damage,(int(width*0.6),int(height*0.4)))
-        text_monster_damage = self.fontBig.render(('-' + str(self.GameState.playerDamageTaken)), False, (255, 0, 0))
-        self.window.blit(text_monster_damage,(int(width*0.2),int(height*0.4)))
+
+        if(self.GameState.playerIsDead==False):
+            text_player_damage = self.fontBig.render(('-' + str(self.GameState.playerNextDamage)), False, (255, 140, 0))
+            if(self.GameState.playerNextDamage == 0):
+                text_player_damage = self.fontBig.render('Miss',False,(138,43,226))
+            self.window.blit(text_player_damage,(int(width*0.6),int(height*0.4)))
+            text_monster_damage = self.fontBig.render(('-' + str(self.GameState.playerDamageTaken)), False, (255, 0, 0))
+            self.window.blit(text_monster_damage,(int(width*0.2),int(height*0.4)))
 
         text_player_rec = self.fontBig.render(('+' + str(self.GameState.playerHPRecovery)), False, (0, 50, 255))
         self.window.blit(text_player_rec,(int(width*0.2),int(height*0.35)))
@@ -923,7 +1002,7 @@ class UserInterface():
 
 
         #Version Number
-        version_number = self.font.render('Pre Alpha 1.0', False, (0,0,0))
+        version_number = self.font.render('Pre Alpha 1.1', False, (0,0,0))
         version_number_rect = version_number.get_rect(center=(int(width*0.9),int(height*0.95)))
         self.window.blit(version_number,version_number_rect)
 
@@ -1002,7 +1081,7 @@ class UserInterface():
                 # Main Game Loop
                 self.mouse = pygame.mouse.get_pos()
                 self.processInput()
-                if(self.GameState.timeCounter %20 == 0):
+                if(self.GameState.timeCounter %4 == 0):
                     self.update()
                     self.GameState.expMin += 1
                     if(self.GameState.expMin == 60):
@@ -1030,6 +1109,9 @@ data = {
     'self.currentEXP': 0,
     'self.playerStrength':12,
     'self.playerTotalStrength': 12,
+    'self.playerDexterity':4,
+    'self.playerTotalDexterity':4,
+    'self.statPoints':0,
     'self.playerLevel': 1,
     'self.playerCurrentHP':50,
     'self.playerMaxHP': 50,
@@ -1045,9 +1127,9 @@ data = {
     'self.playerInventoryCount': 0,
     'self.InventoryR': [],
 
-    'self.playerEquips': {'Weapon':['Sword', 'Weapon', 0, 17, 0, 7],'Top':['White Undershirt', 'Top', 0, 0, 3, 7],'Bottom':['Blue Jean Shorts','Bottom',0,0,2,7],
-                             'Gloves':['Empty', 'Gloves',0,0,0,0],'Hat':['Empty', 'Hat', 0,0,0,0],
-                             'Shoes':['Leather Sandals', 'Shoes',0,0,2,5], 'Cape':['Empty','Cape',0,0,0,0]},
+    'self.playerEquips': {'Weapon':['Sword', 'Weapon', 0, 17, 0, 7,0],'Top':['White Undershirt', 'Top', 0, 0, 3, 7,0],'Bottom':['Blue Jean Shorts','Bottom',0,0,2,7,0],
+                             'Gloves':['Empty', 'Gloves',0,0,0,0,0],'Hat':['Empty', 'Hat', 0,0,0,0,0],
+                             'Shoes':['Leather Sandals', 'Shoes',0,0,2,5,0], 'Cape':['Empty','Cape',0,0,0,0,0]},
 
     'self.playerArmor': 7,
     'self.playerWA': 17,
