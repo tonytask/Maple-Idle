@@ -40,6 +40,8 @@ Press Escape to Return to the Previous Screen. If no Previous, End
 
 4. To Do
 
+Fix Equipment and Inventory UI
+
 Skill Point System
 
 Shop System
