@@ -42,6 +42,8 @@ Press Escape to Return to the Previous Screen. If no Previous, End
 
 Fix Equipment and Inventory UI
 
+Add System Log Display
+
 Skill Point System
 
 Shop System
