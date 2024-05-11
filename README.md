@@ -48,5 +48,11 @@ Add more Monsters, Bosses, Items, Higher Level Cap
 
 Balance Item Progression
 
+5. Bugs
+
+Kill Count Resets when loadGame() is called (when game is closed)
+
+
+
 
 
