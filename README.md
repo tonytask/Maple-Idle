@@ -38,11 +38,9 @@ Press Escape to Return to the Previous Screen. If no Previous, End
 
 4. To Do
 
-Add Dexterity and Accuarcy Stat to make the game more similar to Maplestory and more Interesting
+Skill Point System
 
-Enhance Stat and Skill Point System
-
-Add Shop System
+Shop System
 
 Add more Monsters, Bosses, Items, Higher Level Cap
 
