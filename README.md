@@ -42,7 +42,7 @@ Skill Point System
 
 Shop System
 
-Add more Monsters, Bosses, Items, Higher Level Cap
+Add more Monsters, Bosses, Items, Scrolls, Higher Level Cap
 
 Balance Item Progression
 
