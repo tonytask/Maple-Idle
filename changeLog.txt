@@ -1,0 +1,9 @@
+Pre Alpha 1.1
+  Added Stat Point System
+  Added Dexterity Stat
+  Changed UI to show Stat Points
+  Changed Max HP Increase upon Level Formula 
+  Added Some Items to the Drop Table
+  Combined Monster and Boss Tables (Gameplay Unaffected)
+  
+  
