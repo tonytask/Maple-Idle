@@ -48,7 +48,7 @@ Balance Item Progression
 
 5. Bugs
 
-Kill Count Resets when loadGame() is called (when game is closed)
+Kill Count is not saving 
 
 
 
