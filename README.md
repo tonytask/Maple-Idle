@@ -1,7 +1,7 @@
 # Maple-Idle
 1. Introduction
 
-Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. The game is primarily an incremental idle RPG. 
+Welcome to Maple Idle! The game is inspired by the MMORPG Maplestory. The game is primarily an incremental idle RPG. It is developed using the Pygame library.
 
 
 2. Features
